@@ -50,17 +50,17 @@ def is_kubernetes_manifest(filename: str) -> List[dict]:
         List[dict]: List of loaded yaml files
     """
     try:
-      fname = os.path.expanduser(filename)
+        fname = os.path.expanduser(filename)
 
-      with open(file=fname, mode="r") as stream:
-          manifests = list(yaml.load_all(stream=stream,
-                                         Loader=yaml.SafeLoader))
+        with open(file=fname, mode="r") as stream:
+            manifests = list(yaml.load_all(stream=stream,
+                                           Loader=yaml.SafeLoader))
     except Exception as e:
         return []
     for manifest in manifests:
-      if not manifest.get("apiVersion"):
-          return []
-      return manifests
+        if not manifest.get("apiVersion"):
+            return []
+        return manifests
 
 
 def is_namespaced_kubernetes_manifest(manifest: dict) -> bool:
@@ -78,6 +78,7 @@ def is_namespaced_kubernetes_manifest(manifest: dict) -> bool:
         return False
     return True
 
+
 def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) -> bool:
     """is_ignored_kubernetes_kind check if a dict has a key which is in a list of kinds
     who shouldn't be checked
@@ -90,11 +91,11 @@ def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) ->
         bool: True if 'kind' is in the 'ignored_kinds' list, False if not
     """
     if not ignored_kinds:
-      return False
-
-    if manifest.get("kind", "invalid_value") not in ignored_kinds:
         return False
-    return True
+
+    if manifest.get("kind", "invalid_value") in ignored_kinds:
+        return True
+    return False
 
 
 def main(argv: List = None):
@@ -124,8 +125,8 @@ Kinds passed with '--ignored-kinds' will not be checked.
             if not manifest:
                 continue
 
-            if not is_ignored_kubernetes_kind(manifest=manifest,
-                                                ignored_kinds=args.ignored_kinds):
+            if is_ignored_kubernetes_kind(manifest=manifest,
+                                          ignored_kinds=args.ignored_kinds):
                 continue
 
             if not is_namespaced_kubernetes_manifest(manifest=manifest):
