@@ -69,7 +69,7 @@ def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) ->
     if kind in ignored_kinds:
         return True
 
-    if kind == "kustomizaton" and "kustomize.config.k8s.io" in manifest.get("apiVersion"):
+    if kind == "kustomization" and "kustomize.config.k8s.io" in manifest.get("apiVersion"):
         return True
 
     return False
