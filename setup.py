@@ -23,4 +23,7 @@ setup(
             'namespaced = hooks.namespaced:main',
         ],
     },
+    install_requires = [
+        "pyyaml"
+    ]
 )
