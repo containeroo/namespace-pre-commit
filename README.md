@@ -1,11 +1,13 @@
-# namespace pre-commit
+# containeroo pre-commit-hooks
 
-## example
+## examples
+
+### namespaced
 
 ```yaml
 fail_fast: false
 repos:
-- repo: https://github.com/containeroo/namespace-pre-commit
+- repo: https://github.com/containeroo/pre-commit-hooks
   rev: v0.0.4
   hooks:
   - id: namespaced
