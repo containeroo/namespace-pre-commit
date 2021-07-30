@@ -86,10 +86,16 @@ Kinds passed with '--ignore-kind' will not be checked.
                         help='filenames to check')
     parser.add_argument('--ignore-kind', '-i',
                         action='extend',
-                        default=["namespace"],
+                        default=["namespace",
+                                 "clusterrole",
+                                 "clusterrolebinding",
+                                 "persistentvolume",
+                                 "storageclass",
+                                 "ingressclass",
+                                 ],
                         dest="ignored_kinds",
                         help='kind to ignore',
-                        nargs="*",
+                        nargs=1,
                         metavar="Kind")
     args = parser.parse_args(argv)
 
