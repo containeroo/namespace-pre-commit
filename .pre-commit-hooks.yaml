@@ -1,0 +1,7 @@
+---
+- id: namespaced
+  name: Check for Kubernetes manifest without namespace
+  description: Forbid Kubernetes manifest without namespace to be commited
+  entry: namespaced
+  language: python
+  files: ((^|/)*.(ya?ml)$)
