@@ -42,6 +42,7 @@ def kubernetes_manifest_has_namespace(manifest: dict) -> bool:
     """
     if not manifest.get("metadata"):
         return False
+
     if not manifest["metadata"].get("namespace"):
         return False
 
@@ -62,6 +63,9 @@ def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) ->
 
     if not ignored_kinds:
         return False
+
+    if manifest.get("kind").lower() == "kustomizaton" and "kustomize.config.k8s.io" in manifest.get("apiVersion"):
+        return True
 
     if manifest.get("kind", "invalid_value").lower() in ignored_kinds:
         return True
