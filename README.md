@@ -23,7 +23,7 @@ repos:
   - id: namespaced
     args:
     - --ignore-kind
-    - namespace
+    - clusterpolicy
     - -i
     - GlobalNetworkPolicy
 ```
