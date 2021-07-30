@@ -101,6 +101,8 @@ Kinds passed with '--ignore-kind' will not be checked.
                         metavar="Kind")
     args = parser.parse_args(argv)
 
+    ignored_kinds = [k.lower() for k in args.ignored_kinds]
+
     return_code = 0
     for fname in args.filenames:
         manifests = is_kubernetes_manifest(filename=fname)
@@ -110,7 +112,7 @@ Kinds passed with '--ignore-kind' will not be checked.
                 continue
 
             if is_ignored_kubernetes_kind(manifest=manifest,
-                                          ignored_kinds=args.ignored_kinds):
+                                          ignored_kinds=ignored_kinds):
                 continue
 
             if not kubernetes_manifest_has_namespace(manifest=manifest):
