@@ -1,5 +1,15 @@
 # containeroo pre-commit-hooks
 
+## installation
+
+add a config `.pre-commit-hooks.yaml`, for content see examples.
+
+install hooks:
+
+```bash
+pre-commit install --install-hooks
+```
+
 ## examples
 
 ### namespaced
