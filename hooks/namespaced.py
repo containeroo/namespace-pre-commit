@@ -40,7 +40,7 @@ class CustomFormatter(CustomHelpFormatter,
 
 def is_kubernetes_manifest(filename: str) -> List[dict]:
     """is_kubernetes_manifest test if a file is a Kubernetes manifest by loading
-    the 'filename' is a vaild yaml and has a the key 'apiVersion'. A file can
+    the 'filename' is a valid yaml and has a the key 'apiVersion'. A file can
     contain multiple yaml-files.
 
     Args:
@@ -63,8 +63,8 @@ def is_kubernetes_manifest(filename: str) -> List[dict]:
         return manifests
 
 
-def is_namespaced_kubernetes_manifest(manifest: dict) -> bool:
-    """is_namespaced_kubernetes_manifest check if a dict has the key 'metadata.namespace'
+def kubernetes_manifest_has_namespace(manifest: dict) -> bool:
+    """kubernetes_manifest_has_namespace check if a dict has the key 'metadata.namespace'
 
     Args:
         manifest (dict): Kubernetes manifest (loaded as dict) to search for the key 'metadata.namespace'
@@ -76,6 +76,7 @@ def is_namespaced_kubernetes_manifest(manifest: dict) -> bool:
         return False
     if not manifest["metadata"].get("namespace"):
         return False
+
     return True
 
 
@@ -95,6 +96,7 @@ def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) ->
 
     if manifest.get("kind", "invalid_value") in ignored_kinds:
         return True
+
     return False
 
 
@@ -129,7 +131,7 @@ Kinds passed with '--ignored-kinds' will not be checked.
                                           ignored_kinds=args.ignored_kinds):
                 continue
 
-            if not is_namespaced_kubernetes_manifest(manifest=manifest):
+            if not kubernetes_manifest_has_namespace(manifest=manifest):
                 print(f"Kubernetes manifest missing namespace: {fname}")
                 return_code = 1
                 continue
