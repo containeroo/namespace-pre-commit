@@ -94,6 +94,7 @@ Kinds passed with '--ignore-kind' will not be checked.
                                  "persistentvolume",
                                  "storageclass",
                                  "ingressclass",
+                                 "customresourcedefinition"
                                  ],
                         dest="ignored_kinds",
                         help='kind to ignore',
