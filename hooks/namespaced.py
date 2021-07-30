@@ -6,38 +6,6 @@ from typing import List
 import yaml
 
 
-class CustomHelpFormatter(argparse.HelpFormatter):
-    def __init__(self, prog):
-        # change max_help_position
-        super(CustomHelpFormatter, self).__init__(prog, max_help_position=42)
-
-    def _format_action_invocation(self, action):
-        if not action.option_strings:
-            metavar, = self._metavar_formatter(action, action.dest)(1)
-            return metavar
-        else:
-            parts = []
-            # if the Optional doesn't take a value, format is:
-            #    -s, --long
-            if action.nargs == 0:
-                parts.extend(action.option_strings)
-
-            # if the Optional takes a value, format is:
-            #    -s, --long ARGS
-            else:
-                default = action.dest.upper()
-                args_string = self._format_args(action, default)
-                for option_string in action.option_strings:
-                    parts.append('%s' % option_string)
-                parts[-1] += ' %s' % args_string
-            return ', '.join(parts)
-
-
-class CustomFormatter(CustomHelpFormatter,
-                      argparse.RawDescriptionHelpFormatter):
-    pass
-
-
 def is_kubernetes_manifest(filename: str) -> List[dict]:
     """is_kubernetes_manifest test if a file is a Kubernetes manifest by loading
     the 'filename' is a valid yaml and has a the key 'apiVersion'. A file can
@@ -102,7 +70,7 @@ def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) ->
 
 def main(argv: List = None):
     parser = argparse.ArgumentParser(
-        formatter_class=CustomFormatter,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
         description="""
 Check if 'filenames' are Kubernetes manifests and have the key 'metadata.namespace'.
 Kinds passed with '--ignored-kinds' will not be checked.
