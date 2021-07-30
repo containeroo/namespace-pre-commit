@@ -22,7 +22,7 @@ repos:
   hooks:
   - id: namespaced
     args:
-    - --ignored-kind
+    - --ignore-kind
     - namespace
     - -i
     - GlobalNetworkPolicy
