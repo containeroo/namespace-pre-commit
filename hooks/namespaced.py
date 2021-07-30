@@ -62,7 +62,7 @@ def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) ->
     if not ignored_kinds:
         return False
 
-    if manifest.get("kind", "invalid_value") in ignored_kinds:
+    if manifest.get("kind", "invalid_value").lower() in ignored_kinds:
         return True
 
     return False
@@ -86,7 +86,7 @@ Kinds passed with '--ignored-kinds' will not be checked.
                         nargs=1,
                         metavar="Kind")
     args = parser.parse_args(argv)
-
+    ignored_kinds = [kind.lower().strip() for kind in args.ignored_kinds if isinstance(kind, str)]
     return_code = 0
     for fname in args.filenames:
         manifests = is_kubernetes_manifest(filename=fname)
@@ -96,7 +96,7 @@ Kinds passed with '--ignored-kinds' will not be checked.
                 continue
 
             if is_ignored_kubernetes_kind(manifest=manifest,
-                                          ignored_kinds=args.ignored_kinds):
+                                          ignored_kinds=ignored_kinds):
                 continue
 
             if not kubernetes_manifest_has_namespace(manifest=manifest):
