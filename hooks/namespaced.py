@@ -59,6 +59,7 @@ def is_ignored_kubernetes_kind(manifest: dict, ignored_kinds: List[str] = []) ->
     Returns:
         bool: True if 'kind' is in the 'ignored_kinds' list, False if not
     """
+
     if not ignored_kinds:
         return False
 
@@ -73,20 +74,21 @@ def main(argv: List = None):
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description="""
 Check if 'filenames' are Kubernetes manifests and have the key 'metadata.namespace'.
-Kinds passed with '--ignored-kinds' will not be checked.
+Kinds passed with '--ignore-kind' will not be checked.
 """)
 
     parser.add_argument('filenames',
                         nargs='+',
                         help='filenames to check')
-    parser.add_argument('--ignored-kind', '-i',
+    parser.add_argument('--ignore-kind', '-i',
                         action='extend',
+                        default=["namespace"],
                         dest="ignored_kinds",
                         help='kind to ignore',
-                        nargs=1,
+                        nargs="*",
                         metavar="Kind")
     args = parser.parse_args(argv)
-    ignored_kinds = [kind.lower().strip() for kind in args.ignored_kinds if isinstance(kind, str)]
+
     return_code = 0
     for fname in args.filenames:
         manifests = is_kubernetes_manifest(filename=fname)
@@ -96,7 +98,7 @@ Kinds passed with '--ignored-kinds' will not be checked.
                 continue
 
             if is_ignored_kubernetes_kind(manifest=manifest,
-                                          ignored_kinds=ignored_kinds):
+                                          ignored_kinds=args.ignored_kinds):
                 continue
 
             if not kubernetes_manifest_has_namespace(manifest=manifest):
