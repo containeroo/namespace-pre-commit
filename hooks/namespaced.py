@@ -79,12 +79,12 @@ Kinds passed with '--ignored-kinds' will not be checked.
     parser.add_argument('filenames',
                         nargs='+',
                         help='filenames to check')
-    parser.add_argument('--ignored-kinds', '-i',
-                        help='kinds to ignore',
+    parser.add_argument('--ignored-kind', '-i',
+                        action='extend',
                         dest="ignored_kinds",
-                        nargs="*",
-                        metavar="Kind",
-                        default=[])
+                        help='kind to ignore',
+                        nargs=1,
+                        metavar="Kind")
     args = parser.parse_args(argv)
 
     return_code = 0
