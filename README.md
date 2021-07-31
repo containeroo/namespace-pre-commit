@@ -9,7 +9,7 @@ by default.
 
 It also ignores all `kustomization.kustomize.config.k8s.io` objects.
 
-You can define other ignored kinds by setting the argument `--ignore-kind KINDNAME`.
+You can define other ignored kinds by setting the argument `--ignore-kind KINDNAME` (case insensitive).
 
 ## installation
 
