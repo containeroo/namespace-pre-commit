@@ -4,7 +4,7 @@
 
 The namespaced hook checks if Kubernetes manifests are namespaced.
 
-It ignores `namespaces, clusterroles, clusterrolebindings, persistentvolumes, storageclasses, ingressclasses and customresourcedefinitions`
+It ignores `Namespaces, ClusterRoles, ClusterRoleBindings, PersistentVolumes, StorageClasses, IngressClasses and CustomResourceDefinitions`
 by default.
 
 It also ignores all `kustomization.kustomize.config.k8s.io` objects.
