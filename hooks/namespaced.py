@@ -97,7 +97,7 @@ Kinds passed with '--ignore-kind' will not be checked.
                                  "CustomResourceDefinition"
                                  ],
                         dest="ignored_kinds",
-                        help="kind to ignore. defaults to %(default)s",
+                        help="kind to ignore (case insensitive). defaults to %(default)s",
                         nargs=1,
                         metavar="Kind")
     args = parser.parse_args(argv)
