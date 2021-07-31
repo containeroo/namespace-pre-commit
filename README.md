@@ -29,7 +29,7 @@ pre-commit install --install-hooks
 fail_fast: false
 repos:
 - repo: https://github.com/containeroo/pre-commit-hooks
-  rev: v0.0.4
+  rev: v0.0.11
   hooks:
   - id: namespaced
     args:
