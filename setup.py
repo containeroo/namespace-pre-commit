@@ -1,10 +1,10 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='namespace-pre-commit',
-    description='Check for Kubernetes manifest without namespace',
-    url='https://github.com/containeroo/namespace-pre-commit',
-    version='0.0.1',
+    name='pre-commit-hooks',
+    description='',
+    url='Some out-of-the-box hooks for pre-commit',
+    version='v0.0.12',
 
     author='containeroo',
     author_email='hello@containeroo.ch',
@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'namespaced = hooks.namespaced:main',
+            'forbidden_pattern = hooks.forbidden_pattern:main'
         ],
     },
     install_requires = [
