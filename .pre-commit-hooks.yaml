@@ -5,3 +5,9 @@
   entry: namespaced
   language: python
   files: ((^|/)*.(ya?ml)$)
+- id: forbidden_pattern
+  name: Check if file contains forbidden patterns
+  description: Forbid files with forbidden patterns to be commited
+  entry: forbidden_pattern
+  language: python
+  files: (.*)
