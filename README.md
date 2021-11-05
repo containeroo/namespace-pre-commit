@@ -52,7 +52,7 @@ repos:
   hooks:
   - id: forbid_pattern
     args:
-    - --forbidden_pattern
+    - --forbidden-pattern
     - secret
     - -f
     - "name:\s+super-secret"
