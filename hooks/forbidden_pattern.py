@@ -47,7 +47,7 @@ Check if 'filenames' contains forbidden patterns
                         metavar="Word")
     args = parser.parse_args(argv)
 
-    patterns = [re.compile(w, re.IGNORECASE) for w in args.forbidden_pattern if w]
+    patterns = [re.compile(os.path.expandvars(w), re.IGNORECASE) for w in args.forbidden_pattern if w]
 
     return_code = 0
     for fname in args.filenames:
