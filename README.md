@@ -40,6 +40,7 @@ repos:
 ### forbidden_pattern
 
 The forbidden_pattern hook checks if files contains not wanted patterns.
+If the pattern contains `${VAR}` or `$VAR`, it will be replaced.
 
 ### example
 
