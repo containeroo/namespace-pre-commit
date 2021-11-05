@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: super-secret
+stringData:
+  BASE_DOMAIN: example.com
